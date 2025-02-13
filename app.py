@@ -3,7 +3,7 @@ from flask_cors import CORS
 import pandas as pd
 
 app = Flask(__name__)
-CORS(app)  # Adicione esta linha
+CORS(app)
 
 tabela = pd.read_csv('src/STH_Library.csv', delimiter=';', dtype=str)
 
