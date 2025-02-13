@@ -1,5 +1,10 @@
 # Shadow The Hedgehog Library API
 
+<p align="center">
+  <br />
+  <img src="_docs/assets/rotas.png" />
+</p>
+
 Este projeto é uma aplicação web que permite consultar rotas específicas e exibi-las visualmente. A aplicação é construída utilizando Flask para o backend e HTML, CSS e JavaScript para o frontend.
 
 ## Estrutura do Projeto
