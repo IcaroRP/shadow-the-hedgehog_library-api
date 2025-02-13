@@ -22,9 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Remover classes anteriores de cores
                 document.querySelectorAll('.stage').forEach(el => {
                     el.classList.remove('dark', 'normal', 'hero');
+                    el.innerHTML = el.innerText.split(" (")[0];
                 });
 
-                // Adicionar destaque nas fases da rota com base no tipo
+                // Adicionar destaque nas fases da rota com base no tipo e mostrar o tipo ao lado
                 fases.forEach(fase => {
                     const nomeFase = fase.split("(")[0].trim();
                     const tipoFase = fase.split("(")[1]?.replace(")", "").toLowerCase().trim();
@@ -39,6 +40,11 @@ document.addEventListener('DOMContentLoaded', function () {
                             elemento.classList.add('hero');
                         } else {
                             elemento.classList.add('normal');
+                        }
+
+                        // Exibir o tipo da fase ao lado do nome
+                        if (!elemento.innerHTML.includes(tipoFase)) {
+                            elemento.innerHTML += ` <span class="tipoFase">(${tipoFase})</span>`;
                         }
                     }
                 });

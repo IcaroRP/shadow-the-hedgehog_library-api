@@ -5,7 +5,7 @@ body {
 .diagrama {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     margin-top: 20px;
 }
 
@@ -23,15 +23,15 @@ body {
 }
 
 .column:nth-child(1) {
-    margin-top: 160px; /* Stage 1 mais abaixo */
+    margin-top: 143px; /* Stage 1 mais abaixo */
 }
 
 .column:nth-child(2) {
-    margin-top: 80px; /* Stage 2 mais abaixo */
+    margin-top: 72px; /* Stage 2 mais abaixo */
 }
 
 .column:nth-child(3) {
-    margin-top: 80px; /* Stage 3 mais abaixo */
+    margin-top: 72px; /* Stage 3 mais abaixo */
 }
 
 #nomeRota{
@@ -48,7 +48,8 @@ body {
     border-radius: 5px;
     background-color: #f4f4f4;
     text-align: center;
-    min-width: 100px;
+    min-width: 15px;
+    font-size: 8px;
 }
 
 .stage.dark {
@@ -61,4 +62,10 @@ body {
 
 .stage.hero {
     background-color: #3498db;
+}
+
+.tipoFase {
+    font-size: 0.9em;
+    text-transform: capitalize;
+    color: #eee;
 }
