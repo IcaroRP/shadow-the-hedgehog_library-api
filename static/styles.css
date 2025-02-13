@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.diagrama {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.busca {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.column:nth-child(1) {
+    margin-top: 160px; /* Stage 1 mais abaixo */
+}
+
+.column:nth-child(2) {
+    margin-top: 80px; /* Stage 2 mais abaixo */
+}
+
+.column:nth-child(3) {
+    margin-top: 80px; /* Stage 3 mais abaixo */
+}
+
+#nomeRota{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.stage {
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    text-align: center;
+    min-width: 100px;
+}
+
+.stage.dark {
+    background-color: #e74c3c;
+}
+
+.stage.normal {
+    background-color: #7f8c8d;
+}
+
+.stage.hero {
+    background-color: #3498db;
+}
