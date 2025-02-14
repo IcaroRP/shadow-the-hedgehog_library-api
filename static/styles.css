@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #359917;
 }
 
 .diagrama {
@@ -23,33 +24,39 @@ body {
 }
 
 .column:nth-child(1) {
-    margin-top: 143px; /* Stage 1 mais abaixo */
+    margin-top: 185px; /* Stage 1 mais abaixo */
 }
 
 .column:nth-child(2) {
-    margin-top: 72px; /* Stage 2 mais abaixo */
+    margin-top: 93px; /* Stage 2 mais abaixo */
 }
 
 .column:nth-child(3) {
-    margin-top: 72px; /* Stage 3 mais abaixo */
+    margin-top: 93px; /* Stage 3 mais abaixo */
 }
 
 #nomeRota{
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px; 
-    font-size: 1.5em;
+    font-size: 2.5em;
     font-weight: bold;
+    color: #ffffff;
 }
 
 .stage {
-    padding: 25px;
+    width: 150px;           /* Largura fixa para todos os retângulos */
+    height: 80px;           /* Altura fixa */
+    line-height: 80px;      /* Alinha o texto verticalmente */
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f4f4f4;
     text-align: center;
-    min-width: 15px;
-    font-size: 8px;
+    font-size: 13px;
+    overflow: hidden;       /* Esconde excesso de texto */
+    white-space: nowrap;    /* Evita quebra de linha */
+    text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+    transition: background-color 0.3s ease; /* Transição suave para as cores */
 }
 
 .stage.dark {
@@ -68,4 +75,12 @@ body {
     font-size: 0.9em;
     text-transform: capitalize;
     color: #eee;
+}
+
+#richPresence {
+    font-weight: bold;
+    font-style: italic;
+    color: #f39c12;
+    padding-top: 25px;
+    font-size: 2em;
 }
