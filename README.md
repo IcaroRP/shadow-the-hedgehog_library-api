@@ -11,22 +11,38 @@ Este projeto é uma aplicação web que permite consultar rotas específicas e e
 
 ```
 .
+├── _docs/
+│   └── assets/
+│       └── rotas.png
 ├── app.py
 ├── index.html
 ├── src/
 │   └── STH_Library.csv
-└── static/
-    ├── script.js
-    └── styles.css
+├── static/
+│   ├── images/
+│   │   ├── 2MissionEmpty.png
+│   │   ├── 3MissionEmpty.png
+│   │   ├── AirFleetIcon.png
+│   │   ├── BlackCometIcon.png
+│   │   ├── Boss.png
+│   │   ├── BossComplete.png
+│   │   ├── CentralCityIcon.png
+│   │   ├── ...
+│   ├── script.js
+│   └── styles.css
+└── requirements.txt
 ```
 
 ### Arquivos e Diretórios
 
-- app.py: Arquivo principal do backend que contém a lógica do servidor Flask.
-- index.html: Arquivo HTML que define a estrutura da página web.
-- STH_Library.csv: Arquivo CSV que contém os dados das rotas.
-- script.js: Arquivo JavaScript que contém a lógica do frontend.
-- styles.css: Arquivo CSS que define o estilo da página web.
+- **_docs/assets/**: Contém a imagem `rotas.png` usada no README.
+- **app.py**: Arquivo principal do backend que contém a lógica do servidor Flask.
+- **index.html**: Arquivo HTML que define a estrutura da página web.
+- **src/STH_Library.csv**: Arquivo CSV que contém os dados das rotas.
+- **static/images/**: Diretório que contém as imagens usadas na aplicação.
+- **static/script.js**: Arquivo JavaScript que contém a lógica do frontend.
+- **static/styles.css**: Arquivo CSS que define o estilo da página web.
+- **requirements.txt**: Arquivo que lista as dependências do projeto.
 
 ## Funcionalidades
 
@@ -44,7 +60,7 @@ Este projeto é uma aplicação web que permite consultar rotas específicas e e
 
 1. **Instalar dependências**:
     ```sh
-    pip install flask flask-cors pandas
+    pip install -r requirements.txt
     ```
 
 2. **Executar o servidor Flask**:
@@ -52,7 +68,7 @@ Este projeto é uma aplicação web que permite consultar rotas específicas e e
     python app.py
     ```
 
-3. **Abrir o arquivo index.html** no navegador para acessar a interface web.
+3. **Abrir o arquivo `index.html`** no navegador para acessar a interface web.
 
 ## Exemplo de Uso
 
