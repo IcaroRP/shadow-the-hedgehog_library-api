@@ -20,9 +20,15 @@ if (apiKey) {
             .then(data => {
                 // Pega a informação RichPresenceMsg do JSON
                 const richPresenceMsg = data.RichPresenceMsg;
-
+    
+                // Define a posição inicial (por exemplo, após o caractere "|")
+                const posicaoInicial = richPresenceMsg.indexOf('in ') + 2;
+    
+                // Extrai o texto a partir da posição inicial
+                const textoFormatado = richPresenceMsg.substring(posicaoInicial).replace(/\|/g, '\n');
+    
                 // Exibe na página
-                document.getElementById('richPresenceTexto').innerText = richPresenceMsg;
+                document.getElementById('richPresenceTexto').innerText = textoFormatado;
             })
             .catch(error => {
                 console.error('Erro ao buscar RichPresence:', error);
@@ -35,7 +41,76 @@ if (apiKey) {
     setInterval(buscarRichPresence, 5000);
 }
 
-// Função para buscar a rota pelo ID
+function desenharLinha() {
+    const svg = document.getElementById('linhaRota');
+    svg.innerHTML = ''; // Limpa linhas anteriores
+
+    // Seleciona apenas as fases que estão ativas (com as classes .dark, .normal, ou .hero)
+    const activeStages = document.querySelectorAll('.diagrama .stage.dark, .diagrama .stage.normal, .diagrama .stage.hero');
+    const pontos = [];
+
+    // Obtém o contêiner do diagrama para calcular as coordenadas relativas
+    const diagrama = document.querySelector('.diagrama');
+
+    activeStages.forEach(stage => {
+        // Calcula as coordenadas relativas ao contêiner do diagrama
+        const rect = stage.getBoundingClientRect();
+        const diagramaRect = diagrama.getBoundingClientRect();
+        const x = rect.left - diagramaRect.left + (rect.width / 2);
+        const y = rect.top - diagramaRect.top + (rect.height / 1.6);
+        
+        // Obtém o tipo da fase (dark, normal, hero)
+        const tipoFase = stage.classList.contains('dark') ? 'dark' :
+                         stage.classList.contains('hero') ? 'hero' : 'normal';
+        
+        pontos.push({ x, y, tipoFase }); // Armazena as coordenadas e o tipo da fase
+    });
+
+    // Desenha a linha apenas entre as fases ativas
+    for (let i = 0; i < pontos.length - 1; i++) {
+        const linha = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        linha.setAttribute('x1', pontos[i].x);
+        linha.setAttribute('y1', pontos[i].y);
+        linha.setAttribute('x2', pontos[i + 1].x);
+        linha.setAttribute('y2', pontos[i + 1].y);
+
+        // Define a cor da linha com base nos tipos das fases conectadas
+        const tipoAtual = pontos[i].tipoFase;
+        const tipoProximo = pontos[i + 1].tipoFase;
+
+        if (tipoAtual === 'dark' && tipoProximo === 'dark') {
+            linha.setAttribute('stroke', 'red'); // Vermelho para dark-dark
+        } else if (tipoAtual === 'normal' && tipoProximo === 'normal') {
+            linha.setAttribute('stroke', 'green'); // Verde para normal-normal
+        } else if (tipoAtual === 'hero' && tipoProximo === 'hero') {
+            linha.setAttribute('stroke', 'blue'); // Azul para hero-hero
+        } else if (
+            (tipoAtual === 'dark' && tipoProximo === 'normal') ||
+            (tipoAtual === 'normal' && tipoProximo === 'dark')
+        ) {
+            linha.setAttribute('stroke', 'orange'); // Laranja para dark-normal ou normal-dark
+        } else if (
+            (tipoAtual === 'dark' && tipoProximo === 'hero') ||
+            (tipoAtual === 'hero' && tipoProximo === 'dark')
+        ) {
+            linha.setAttribute('stroke', 'purple'); // Roxo para dark-hero ou hero-dark
+        } else if (
+            (tipoAtual === 'normal' && tipoProximo === 'hero') ||
+            (tipoAtual === 'hero' && tipoProximo === 'normal')
+        ) {
+            linha.setAttribute('stroke', 'cyan'); // Ciano para normal-hero ou hero-normal
+        }
+
+        linha.setAttribute('stroke-width', '12'); // Espessura da linha
+        linha.setAttribute('stroke-opacity', '0.7'); // Transparência da linha
+        svg.appendChild(linha);
+    }
+}
+
+// Redesenha a linha quando a janela é redimensionada
+window.addEventListener('resize', desenharLinha);
+
+// Chama a função sempre que uma rota é buscada
 function buscarRota(rotaId) {
     fetch(`http://localhost:5000/rotas/${rotaId}`)
         .then(response => {
@@ -45,21 +120,14 @@ function buscarRota(rotaId) {
             return response.json();
         })
         .then(data => {
-            console.log(data);
-
-            // Exibir o nome da rota acima dos diagramas
             document.getElementById('nomeRota').innerText = `Agora: ${data.Name}`;
-
-            // Pegar apenas os valores das fases Stage 1 a Stage 6
             const fases = Object.values(data).slice(1, 7);
 
-            // Remover classes anteriores de cores
             document.querySelectorAll('.stage').forEach(el => {
                 el.classList.remove('dark', 'normal', 'hero');
                 el.innerHTML = el.innerText.split(" (")[0];
             });
 
-            // Adicionar destaque nas fases da rota com base no tipo e mostrar o tipo ao lado
             fases.forEach(fase => {
                 const nomeFase = fase.split("(")[0].trim();
                 const tipoFase = fase.split("(")[1]?.replace(")", "").toLowerCase().trim();
@@ -76,18 +144,20 @@ function buscarRota(rotaId) {
                         elemento.classList.add('normal');
                     }
 
-                    // Exibir o tipo da fase ao lado do nome
                     if (!elemento.innerHTML.includes(tipoFase)) {
                         elemento.innerHTML += ` <span class="tipoFase">(${tipoFase})</span>`;
                     }
                 }
             });
+
+            desenharLinha(); // Desenha a linha após atualizar as fases
         })
         .catch(error => {
             console.error('Erro ao buscar rota:', error);
             document.getElementById('nomeRota').innerText = 'Rota não encontrada';
         });
 }
+
 
 // Verifica se existe um ID na URL e faz a busca automaticamente
 document.addEventListener('DOMContentLoaded', () => {
