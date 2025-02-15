@@ -1,12 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #359917;
 }
 
 .diagrama {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 0.1px;
     margin-top: 20px;
 }
 
@@ -42,33 +41,103 @@ body {
     font-size: 2.5em;
     font-weight: bold;
     color: #ffffff;
+    text-shadow: 
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,  
+        -1px 1px 0 #000,  
+        1px 1px 0 #000;
 }
 
-.stage {
-    width: 150px;           /* Largura fixa para todos os retângulos */
-    height: 80px;           /* Altura fixa */
-    line-height: 80px;      /* Alinha o texto verticalmente */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f4f4f4;
-    text-align: center;
-    font-size: 13px;
-    overflow: hidden;       /* Esconde excesso de texto */
-    white-space: nowrap;    /* Evita quebra de linha */
-    text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
-    transition: background-color 0.3s ease; /* Transição suave para as cores */
+/* Dark com 2 Missões */
+.stage.dark.duasMissoes {
+    line-height: 50px;
+    background-image: 
+        url('images/DarkMission2.png'),
+        url('images/2MissionEmpty.png');  /* Imagem base */
+    background-size: 75%, 75%;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
+}
+
+/* Hero com 2 Missões */
+.stage.hero.duasMissoes {
+    line-height: 120px;
+    background-image: 
+        url('images/HeroMission2.png'),
+        url('images/2MissionEmpty.png');  /* Imagem base */
+    background-size: 75%, 75%;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
+}
+
+/* Hero com 2 neutral */
+.stage.normal.duasMissoes {
+    line-height: 50px;
+    background-image: 
+        url('images/DarkMission2.png'),
+        url('images/2MissionEmpty.png');  /* Imagem base */
+    background-size: 75%, 75%;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
 }
 
 .stage.dark {
-    background-color: #e74c3c;
+    line-height: 30px;
+    background-image: 
+        url('images/DarkMission3.png'),
+        url('images/3MissionEmpty.png');  /* Imagem base */
+    background-size: 75%, 75%;                   /* Tamanho das imagens */
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
 }
 
 .stage.normal {
-    background-color: #7f8c8d;
+    background-image: 
+        url('images/NeutralMission3.png'),
+        url('images/3MissionEmpty.png');  /* Imagem base */
+    background-size: 75%, 75%;                   /* Tamanho das imagens */
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
 }
 
 .stage.hero {
-    background-color: #3498db;
+    line-height: 130px;
+    background-image: 
+        url('images/HeroMission3.png'),
+        url('images/3MissionEmpty.png');  /* Imagem base */
+    background-size: 75%, 75%;                   /* Tamanho das imagens */
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
+}
+
+.stage {
+    width: 150px;
+    height: 80px;
+    border: none;
+    background-image: url('images/3MissionEmpty.png');
+    background-size: 75%;
+    background-position: center;
+    background-repeat: no-repeat;
+    text-align: center;
+    font-size: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 80px;
+    color: white; /* Ajuste a cor do texto para melhor contraste */
+    text-shadow: 
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,  
+        -1px 1px 0 #000,  
+        1px 1px 0 #000;
+}
+
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .tipoFase {
@@ -83,4 +152,12 @@ body {
     color: #f39c12;
     padding-top: 25px;
     font-size: 2em;
+}
+
+.stage.duasMissoes {
+    background-image: 
+        url('images/2MissionEmpty.png');
+    background-size: 75%;                   /* Tamanho das imagens */
+    background-repeat: no-repeat;
+    background-position: center;
 }
