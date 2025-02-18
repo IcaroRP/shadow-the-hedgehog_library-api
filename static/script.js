@@ -120,7 +120,7 @@ function buscarRota(rotaId) {
             return response.json();
         })
         .then(data => {
-            document.getElementById('nomeRota').innerText = `Agora: ${data.Name}`;
+            document.getElementById('nomeRota').innerText = `Agora: #${data.id} ${data.Name}`;
             const fases = Object.values(data).slice(1, 7);
 
             document.querySelectorAll('.stage').forEach(el => {
